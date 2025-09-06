@@ -5,9 +5,9 @@
   library(ggplot2)
   
   # set up environment
-  setwd("/Users/dana/Documents/code/RStoolbox")
+  setwd("/Users/dana/Documents/code/R/Sentinel2-Sachrang")
   dir.create("outputs", showWarnings = FALSE)
-  path <- "/Users/dana/Documents/code/RStoolbox/data"
+  path <- "/Users/dana/Documents/code/R/Sentinel2-Sachrang"
   if (!dir.exists(path)) stop("Folder not found: ", path)
   
   # load Sentinel-2 L2A tiles from Sachrang - from Copernicus
@@ -26,3 +26,15 @@
     rng <- as.vector(global(s2[[nm]], "range", na.rm = TRUE))
     cat(sprintf("%s: min=%.2f max=%.2f\n", nm, rng[1], rng[2]))
   }
+
+# ---- 1) RGB composites ----
+  # True-color composite (B04=red, B03=green, B02=blue)
+  png("outputs/rgb_truecolor.png", width = 1100, height = 900, res = 150)
+  plotRGB(s2, r = "B04", g = "B03", b = "B02", stretch = "lin")
+  dev.off()
+  
+  # False-color composite (B08=nir, B04=red, B03=green)
+  png("outputs/rgb_falsecolor.png", width = 1100, height = 900, res = 150)
+  plotRGB(s2, r = "B08", g = "B04", b = "B03", stretch = "sqrt")
+  dev.off()
+  

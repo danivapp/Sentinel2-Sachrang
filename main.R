@@ -75,4 +75,20 @@
   plot_indices(inds, c("NDVI","NDWI","MSAVI","NDBI"))
   dev.off()
   
+# ---- 3) PCA ----
+  bands_for_pca <- c("B02","B03","B04","B08","B11","B12")
+  pca <- rasterPCA(s2[[bands_for_pca]], nSamples = 10000, spca = FALSE, maskCheck = FALSE)
+  names(pca)
+  
+  # Variance explained
+  sdev <- pca$model$sdev
+  ve <- (sdev^2) / sum(sdev^2)
+  png("outputs/pca_variance.png", width=1100, height=700, res=150)
+  barplot(ve, xlab="Principal Component", ylab="Variance explained", main="PCA variance explained")
+  dev.off()
+  
+  # RGB composite of first 3 PCs
+  png("outputs/pca_rgb.png", width=1100, height=900, res=150)
+  plotRGB(pca$map, r=1, g=2, b=3, stretch="lin")
+  dev.off()
   

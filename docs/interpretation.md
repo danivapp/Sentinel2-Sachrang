@@ -121,6 +121,22 @@ This leads to a 3-class interpretation (Forest, Meadow, Urban), which balances t
 
 ![Cluster histograms](../outputs/final_classes_3.png)
 
+### Summary Table (3 Classes)
+
+### Summary Table (3 Classes)
+
+| Class ID | Label  | Pixels | Area (ha) | Median NDVI |
+|:--------:|:-------|-------:|----------:|------------:|
+| 1 | Forest | 119,515 | 541.64 | 0.851 |
+| 2 | Meadow | 85,830  | 388.99 | 0.829 |
+| 3 | Urban  | 6,623   | 30.02  | 0.483 |
+
+### Notes
+
+- **Forests** dominate the landscape (~542 ha), with the highest NDVI (~0.85), indicating dense, healthy canopy cover.  
+- **Meadows** cover ~389 ha and have slightly lower NDVI (~0.83), reflecting mixed grassland with drier and moister patches.  
+- **Urban** occupies only ~30 ha but is spectrally distinct with much lower NDVI (~0.48), confirming non-vegetated surfaces.
+
 ### Important Note on Overfitting
 
 The labeling and interpretation of clusters here were done **post-hoc**, after inspecting both the maps and histograms - thus **overfitting**. Here, however, the exercise is **exploratory** and intended to demonstrate the use of the `RStoolbox` library, not to produce a validated scientific classification.

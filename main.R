@@ -164,6 +164,34 @@
   plot(three_map, type = "classes", main = "Final 3-Class Map (Forest / Meadow / Urban)")
   dev.off()
   
+# ---- 5) Summaries & exports ---- 
+  zones_num3 <- three_map
+  levels(zones_num3) <- NULL     # drop factor levels/categories
+  terra::coltab(zones_num3) <- NULL
+  
+  # Area per class (hectares)
+  cell_m2  <- terra::cellSize(zones_num3, unit = "m")
+  cell_ha  <- cell_m2 / 10000
+  area_ha3 <- as.data.frame(terra::zonal(cell_ha, zones_num3, fun = "sum", na.rm = TRUE))
+  names(area_ha3) <- c("class_id", "area_ha")
+  
+  # Median NDVI per class ---
+  ndvi_med3 <- terra::zonal(inds[["NDVI"]], zones_num3, fun = "median", na.rm = TRUE)
+  names(ndvi_med3) <- c("class_id", "ndvi_median")
+  
+  # Pixel counts per class ---
+  freq3 <- terra::freq(zones_num3, digits = 0)
+  pix_n3 <- data.frame(class_id = freq3$value, pixels = as.integer(freq3$count))
+
+  labels3 <- data.frame(
+    class_id = 1:3,
+    label    = c("Forest", "Meadow", "Urban"))
+  
+  summary_3 <- Reduce(function(a, b) merge(a, b, by = "class_id", all = TRUE),
+                      list(labels3, pix_n3, area_ha3, ndvi_med3))
+  print(summary_3)
+  
+
   
 
   

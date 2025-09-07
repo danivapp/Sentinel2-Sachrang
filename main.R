@@ -92,3 +92,56 @@
   plotRGB(pca$map, r=1, g=2, b=3, stretch="lin")
   dev.off()
   
+# ---- 4) Unsupervised classification (K-means) ----
+  # reflective bands
+  bands_for_cls <- intersect(c("B02","B03","B04","B08","B11","B12"), names(s2))
+  
+  set.seed(42)  
+  uc <- unsuperClass(
+    img         = s2[[bands_for_cls]],
+    nClasses    = 5,        # granularity
+    nSamples    = 10000,    # 
+    nStarts     = 25,       # stability
+    nIter       = 100,      # 
+    norm        = TRUE,     # normalize bands (important when scales differ)
+    clusterMap  = TRUE      # return a classified raster
+  )
+  
+  # Inspect the fitted model in the console
+  print(uc$model)
+  
+  # Save classified raster (GeoTIFF)
+  writeRaster(uc$map, "outputs/clusters.tif", overwrite = TRUE)
+  
+  # Plot & save a nice PNG
+  png("outputs/clusters.png", width = 1100, height = 900, res = 150)
+  plot(uc$map, type = "classes", main = "Unsupervised land-cover clusters (k=5)")
+  dev.off()
+  
+  # Assign labels manually based on cluster inspection
+  labels_df <- data.frame(
+    cluster = 1:5,
+    label   = c("Forest (in shadow)", "Forest (sun exposed)", "Meadow (dry)", "Meadow (moist)", "Urban/Built-up")
+  )
+  levels(uc$map) <- labels_df
+  
+  # map: classes only ----
+  png("outputs/clusters_labeled.png", width = 1200, height = 1000, res = 150)
+  plot(uc$map, type = "classes", main = "Unsupervised land-cover clusters (k = 5)")
+  dev.off()
+  
+  # NDVI per cluster distribution 
+  par(mfrow=c(2,3))
+  png("outputs/clustersHist.png", width = 1100, height = 900, res = 150)
+  for (k in 1:5) {
+    v <- values(inds[["NDVI"]])[values(uc$map) == k]
+    hist(v, breaks=50, main=paste("Cluster", k, "NDVI"), xlab="NDVI", col="forestgreen")
+  }
+  dev.off()  
+  
+
+  
+  
+  
+
+  

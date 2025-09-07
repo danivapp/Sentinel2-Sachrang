@@ -119,10 +119,11 @@ The table below links each unsupervised cluster to its NDVI distribution, interp
 
 This leads to a 3-class interpretation (Forest, Meadow, Urban), which balances the simplicity suggested by PCA with the ecological meaning revealed by the NDVI distributions.
 
+![Cluster histograms](../outputs/final_classes_3.png)
+
 ### Important Note on Overfitting
 
-The labeling and interpretation of clusters here were done **post-hoc**, after inspecting both the maps and histograms. As this **overfitting** — adjusting categories after looking at the data.  
-Here, however, the exercise is **exploratory** and intended to demonstrate the use of the `RStoolbox` library, not to produce a validated scientific classification.
+The labeling and interpretation of clusters here were done **post-hoc**, after inspecting both the maps and histograms - thus **overfitting**. Here, however, the exercise is **exploratory** and intended to demonstrate the use of the `RStoolbox` library, not to produce a validated scientific classification.
 
 ---
 

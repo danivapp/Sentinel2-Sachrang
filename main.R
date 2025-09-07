@@ -142,6 +142,29 @@
   }
   dev.off()
   
+  # reduce clusters 
+  rcl <- matrix(c(
+    1, 1,   # Cluster 1 → 1 (Forest)
+    2, 1,   # Cluster 2 → 1 (Forest)
+    3, 2,   # Cluster 3 → 2 (Meadow)
+    4, 2,   # Cluster 4 → 2 (Meadow)
+    5, 3    # Cluster 5 → 3 (Urban)
+  ), ncol = 2, byrow = TRUE)
+  
+  three_map <- terra::classify(uc$map, rcl)
+  
+  # reduce labels
+  levels(three_map) <- data.frame(
+    value = 1:3,
+    class = c("Forest", "Meadow", "Urban")
+  )
+  
+  # Save 
+  png("outputs/final_classes_3.png", width = 1100, height = 900, res = 150)
+  plot(three_map, type = "classes", main = "Final 3-Class Map (Forest / Meadow / Urban)")
+  dev.off()
+  
+  
 
   
   

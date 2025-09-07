@@ -8,7 +8,7 @@ It also reflects my personal connection to this area — it is idyllic in all se
 ---
 
 ## Analysis Workflow
-👉 [analysis in R](Sentinel2-Sachrang/main.R)
+👉 [analysis in R](main.R)
 
 1. Data loading
 2. RGB composites

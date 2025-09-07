@@ -22,7 +22,7 @@ It also reflects my personal connection to this area — it is idyllic in all se
 ## Interpretation
 
 Detailed interpretation of all results (with figures and tables) can be found here:  
-👉 [docs/interpretation.Rmd](docs/interpretation.Rmd)
+👉 [docs/interpretation.Rmd](docs/interpretation.md)
 
 ---
 

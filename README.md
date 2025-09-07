@@ -8,6 +8,7 @@ It also reflects my personal connection to this area — it is idyllic in all se
 ---
 
 ## Analysis Workflow
+👉 [analysis in R](Sentinel2-Sachrang/main.R)
 
 1. Data loading
 2. RGB composites
@@ -17,12 +18,8 @@ It also reflects my personal connection to this area — it is idyllic in all se
 6. Class consolidation (3 classes)
 7. Summaries
 
----
-
-## Interpretation
-
-Detailed interpretation of all results (with figures and tables) can be found here:  
-👉 [docs/interpretation.Rmd](docs/interpretation.md)
+Detailed interpretation of all **results** (with figures and tables) can be found here:  
+👉 [Results](docs/interpretation.md)
 
 ---
 

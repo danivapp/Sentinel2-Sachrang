@@ -131,13 +131,16 @@
   dev.off()
   
   # NDVI per cluster distribution 
-  par(mfrow=c(2,3))
-  png("outputs/clustersHist.png", width = 1100, height = 900, res = 150)
+  png("outputs/clustersHist.png", width = 1600, height = 1200, res = 150)
+  par(mfrow = c(2,3), mar = c(4,4,2,1))  # 2 rows, 3 cols, adjusted margins
   for (k in 1:5) {
     v <- values(inds[["NDVI"]])[values(uc$map) == k]
-    hist(v, breaks=50, main=paste("Cluster", k, "NDVI"), xlab="NDVI", col="forestgreen")
+    hist(v, breaks = 50,
+         main = paste("Cluster", k, "NDVI"),
+         xlab = "NDVI",
+         col = "forestgreen", border = "white")
   }
-  dev.off()  
+  dev.off()
   
 
   
